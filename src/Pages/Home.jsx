@@ -19,8 +19,8 @@ const HomePage = () => {
   return ( topicos &&
     <>
 
-      <Container maxWidth="lg" sx={{ marginY: 5 }}>
-        <Grid container spacing={1}>
+      <Container maxWidth="md" sx={{ marginY: 5 }}>
+        <Grid container spacing={3}>
           {topicos.map((topico) => (
             <BasicPaper topico={topico} key={topico.id} />
           ))}

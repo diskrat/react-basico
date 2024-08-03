@@ -15,7 +15,7 @@ function App() {
       <MainAppBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/:name" element={<TopicFeed />} />
+        <Route path="/feed" element={<TopicFeed />} />
       </Routes>
     </BrowserRouter>
   )
