@@ -1,0 +1,18 @@
+{
+    "topicos": [
+      { "id": 1, "title": "Olimpiadas" },
+      { "id": 2, "title": "Filmes e Series" },
+      { "id": 3, "title": "Titulo grande demais para ser mostrando em um card so para efeitos de teste" }
+    ],
+    "posts": [
+      { "id": 1, "body": "Um post dentro de um dos topicos", "idTopico": 1,"profileId":1 },
+      { "id": 2, "body": "Um post dentro de um dos topicos", "idTopico": 1 ,"profileId":1},
+      { "id": 3, "body": "Um post dentro de um dos topicos", "idTopico": 1 ,"profileId":2},
+      { "id": 4, "body": "Um post dentro de um dos topicos", "idTopico": 2 ,"profileId":1}
+
+    ],
+    "profile": [
+      {"id": 1, "name": "teste" },
+      {"id": 2, "name": "segundo" }  
+    ]
+  }

@@ -1,23 +1,34 @@
-import HomePage from "./Pages/Home";
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import TopicFeed from "./Pages/TopicFeed";
+import HomePage, { topicoLoader } from "./Pages/Home";
+import { BrowserRouter, defer, Route, Routes } from 'react-router-dom'
+import TopicFeed, { postLoader } from "./Pages/TopicFeed";
 import MainAppBar from "./Components/AppBar";
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { getTopico } from "./fetching";
 
-
-
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+    loader: topicoLoader,
+  },
+  {
+    path: 'topicos/:topicoId/posts',
+    element: <TopicFeed/>,
+    loader: postLoader,
+  },
+]);
 
 function App() {
 
   return (
 
-    <BrowserRouter>
-      <MainAppBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/feed" element={<TopicFeed />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <RouterProvider router={router} />
+    </>
   )
 }
 
