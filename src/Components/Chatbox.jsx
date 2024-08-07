@@ -1,14 +1,18 @@
-import { Card, CardContent, CardHeader, CardActions, Avatar, Box, Collapse, IconButton, Typography, Switch, Input, Button } from "@mui/material";
+import { Card, CardContent, CardHeader, CardActions, Avatar, Box, Collapse, IconButton, Typography, Switch, Input, Button, FormControl } from "@mui/material";
 import { socket } from '../../socket';
 import { useContext, useEffect,  useRef,  useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { UserContext } from "../App";
 import SendIcon from '@mui/icons-material/Send';
-const MessageItem = ({ messageObj, ...props }) => {
+const MessageItem = ({ messageObj, scrollRef, ...props }) => {
     const { id, user, message } = messageObj;
-    scrollRef.current.scrollIntoView()
+
+    useEffect(() => {
+        scrollRef?.current?.scrollIntoView()
+    },[scrollRef]);
+
     return (
-        <Card sx={{ boxShadow: 'none' }}>
+        <Card ref={scrollRef} sx={{ boxShadow: 'none' }}>
             <CardHeader
                 avatar={<Avatar></Avatar>}
                 title={user}
@@ -25,7 +29,8 @@ const ChatBox = () => {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [messageEvents, setMessageEvents] = useState([]);
     const [currentMessage, setCurrentMessage] = useState('');
-    const [user, setUser] = useContext(UserContext)
+    const [user, setUser] = useContext(UserContext);
+    const scrollRef = useRef(null);
 
     function connect() {
         socket.connect();
@@ -86,20 +91,25 @@ const ChatBox = () => {
                         <CardContent display="flex" flexDirection="column" sx={{maxHeight: 200,overflow: "hidden",overflowY: "scroll"}} >
                             {messageEvents.map((message) =>{
                                 
-                             return(<MessageItem messageObj={message} key={message.id} />)}
+                             return(<MessageItem messageObj={message} key={message.id} scrollRef={scrollRef}/>)}
                             )}
                         </CardContent>
                         <Box sx={{ display:'flex', padding: '10px'}}>
-                            <Input 
-                            fullWidth
-                            value={currentMessage} onChange={(e) => {
-                                setCurrentMessage(e.target.value);
+                            <form style={{ display: 'flex', flexGrow: 1 }} 
+                                    onSubmit={(e) => { 
+                                        e.preventDefault();
+                                        sendMessage(currentMessage, user); }}>
+                                <Input 
+                                fullWidth
+                                value={currentMessage} onChange={(e) => {
+                                    setCurrentMessage(e.target.value);
 
-                            }} />
-                            <Button variant="contained" disabled={!user} onClick={() => {
-                                
-                                sendMessage(currentMessage,user);
-                            }}><SendIcon /></Button>
+                                }} />
+                                <Button variant="contained" htmlType='submit' disabled={!user} 
+                                    onClick={() => {sendMessage(currentMessage,user);}}
+                                    
+                                ><SendIcon /></Button>
+                            </form>
                         </Box>
                     </Collapse>
                 </Card>
