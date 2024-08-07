@@ -1,34 +1,24 @@
 import { Avatar, Card, CardContent, CardHeader, IconButton, Typography } from "@mui/material";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useState } from "react";
 
-export default function({post}) {
-    const [like, setLike] = useState(<FavoriteBorderIcon/>);
-    const handleLike = () => {
-        if (like.type.type.render.displayName == "FavoriteBorderIcon"){
-            setLike(<FavoriteIcon/>)
-            
-        } else {
-            setLike(<FavoriteBorderIcon/>)
-        }
-    }
+
+
+export default function ({ post }) {
+
+
     return (
-    <Card raised sx={{margin:'20px'}}>
-        <CardHeader
-            avatar={
-                <Avatar>P</Avatar>
-            }
-            title='hey'
-            action={
-                <IconButton onClick={handleLike}>
-                    {like}
-                </IconButton>
-            }
-        />
+        
+            <Card raised sx={{ margin: '20px' }}>
+                <CardHeader
+                    avatar={<Avatar
 
-        <CardContent>
-            {post.body}
-        </CardContent>
-    </Card>
-)}
+                        alt={post.profile}
+                        src="/broken-image.jpg"
+                    ></Avatar>}
+                    title={post.profile}
+                />
+
+                <CardContent>{post.body}</CardContent>
+            </Card>
+        
+    )
+}

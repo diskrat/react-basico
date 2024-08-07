@@ -12,8 +12,8 @@ export default function BasicPaper({ topico }) {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} >
             <Link to={`topicos/${topico.id}/posts`}>
-                <Paper elevation={2} sx={{ padding: '30px', justifyContent: 'center', direction: 'column', display: 'flex', alignItems: 'center' }}>
-                    <Typography variant='h7' noWrap > {topico.title} </Typography>
+                <Paper elevation={2} sx={{ margin: '5px',padding: '30px', justifyContent: 'center', direction: 'column', display: 'flex', alignItems: 'center' }}>
+                    <Typography noWrap > {topico.title} </Typography>
                 </Paper>
             </Link>
         </Grid>

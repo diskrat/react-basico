@@ -1,16 +1,17 @@
 import { Card, CardContent, CardHeader, CardActions, Avatar, Box, Collapse, IconButton, Typography, Switch, Input, Button } from "@mui/material";
 import { socket } from '../../socket';
-import { useEffect, useState } from "react";
+import { useContext, useEffect,  useRef,  useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-
+import { UserContext } from "../App";
+import SendIcon from '@mui/icons-material/Send';
 const MessageItem = ({ messageObj, ...props }) => {
-    const { username, message, userId } = messageObj;
+    const { id, user, message } = messageObj;
+    scrollRef.current.scrollIntoView()
     return (
         <Card sx={{ boxShadow: 'none' }}>
             <CardHeader
                 avatar={<Avatar></Avatar>}
-                title={username}
+                title={user}
                 subheader={message}
             />
 
@@ -24,7 +25,8 @@ const ChatBox = () => {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [messageEvents, setMessageEvents] = useState([]);
     const [currentMessage, setCurrentMessage] = useState('');
-    const [clerInput, setClearInput] = useState(false);
+    const [user, setUser] = useContext(UserContext)
+
     function connect() {
         socket.connect();
     }
@@ -33,18 +35,13 @@ const ChatBox = () => {
         socket.disconnect();
     }
 
-    const sendMessage = (message) => {
+    const sendMessage = (message,user) => {
         if (!message) return;
-
-        const messageObject = {
-            userId: 1,
-            username: 'Joao',
-            message
-        };
-        setMessageEvents(previous => [...previous, messageObject]);
-        socket.emit('message', messageObject);
+        console.log(message)
+        socket.emit('message', {message,user});
         setCurrentMessage('')
     };
+   
 
     useEffect(() => {
         function onConnect() {
@@ -70,7 +67,7 @@ const ChatBox = () => {
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
-        expanded ? connect() : disconnect();
+        expanded ? disconnect() : connect();
         setIsConnected(expanded);
     };
     return (
@@ -86,10 +83,11 @@ const ChatBox = () => {
                         </IconButton>
                     </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
-                        <CardContent sx={{height: 200, overflowX: 'hidden', overflowY: 'scroll'}} >
-                            {messageEvents?.map((message, index) => {
-                                return (<><MessageItem messageObj={message} key={index} /></>);
-                            })}
+                        <CardContent display="flex" flexDirection="column" sx={{maxHeight: 200,overflow: "hidden",overflowY: "scroll"}} >
+                            {messageEvents.map((message) =>{
+                                
+                             return(<MessageItem messageObj={message} key={message.id} />)}
+                            )}
                         </CardContent>
                         <Box sx={{ display:'flex', padding: '10px'}}>
                             <Input 
@@ -98,9 +96,10 @@ const ChatBox = () => {
                                 setCurrentMessage(e.target.value);
 
                             }} />
-                            <Button onClick={() => {
-                                sendMessage(currentMessage);
-                            }}>Send</Button>
+                            <Button variant="contained" disabled={!user} onClick={() => {
+                                
+                                sendMessage(currentMessage,user);
+                            }}><SendIcon /></Button>
                         </Box>
                     </Collapse>
                 </Card>

@@ -6,7 +6,6 @@ const path = require('path')
 const router = jsonServer.router(path.join(__dirname, 'db.json'))
 const middlewares = jsonServer.defaults()
 
-
 const http = require('http');
 const serverIo = http.createServer(app);
 const { Server } = require("socket.io");
@@ -16,17 +15,17 @@ const io = new Server(serverIo,{
     }
   });
 
-
+let messageId = 0
 io.on('connection', (socket) => {
-    console.log('a user connected');
-
-    socket.on('message', (message) => {
+    console.log(`user connected: ${socket.id}`);
+    socket.on('message', ({message,user}) => {
+        io.emit('message', {id:messageId,user:user,message:message});
+        messageId=messageId+1
         console.log(message);
-        io.emit('message', `${socket.id} + ${message}`);
     });
 
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        console.log(`user disconnected: ${socket.id}`);
     });
 });
 
