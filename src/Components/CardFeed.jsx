@@ -6,7 +6,7 @@ export default function ({ post }) {
 
 
     return (
-        
+         <>{ post.body &&
             <Card raised sx={{ margin: '20px' }}>
                 <CardHeader
                     avatar={<Avatar
@@ -19,6 +19,7 @@ export default function ({ post }) {
 
                 <CardContent>{post.body}</CardContent>
             </Card>
-        
+}
+            </>
     )
 }

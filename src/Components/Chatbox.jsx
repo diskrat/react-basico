@@ -88,7 +88,7 @@ const ChatBox = () => {
                         </IconButton>
                     </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit >
-                        <CardContent display="flex" flexDirection="column" sx={{height: 400,overflow: "hidden",overflowY: "auto"}} >
+                        <CardContent display="flex" flexDirection="column" sx={{height: 300,overflow: "hidden",overflowY: "auto"}} >
                             {messageEvents.map((message) =>{
                                 
                              return(<MessageItem messageObj={message} key={message.id} scrollRef={scrollRef}/>)}

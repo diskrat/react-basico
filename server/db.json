@@ -39,82 +39,8 @@
       "profile": "e"
     },
     {
-      "body": "teste",
-      "idTopico": 3,
-      "profile": "d",
-      "id": 5
-    },
-    {
-      "body": "sera",
-      "idTopico": 3,
-      "profile": "d",
-      "id": 6
-    },
-    {
-      "body": "ioioioio",
-      "idTopico": 3,
-      "id": 7
-    },
-    {
-      "body": "a",
-      "idTopico": 3,
-      "id": 8
-    },
-    {
-      "body": "sera",
-      "idTopico": 3,
-      "id": 9
-    },
-    {
-      "body": "foi?",
-      "idTopico": 3,
-      "id": 10
-    },
-    {
-      "body": "de",
-      "idTopico": 3,
-      "id": 11
-    },
-    {
-      "body": "olo",
-      "idTopico": 3,
-      "id": 12
-    },
-    {
-      "body": "olo",
-      "idTopico": 3,
-      "profile": "a",
-      "id": 13
-    },
-    {
-      "body": "teste teste",
-      "idTopico": 1,
-      "profile": "fweaefwa",
-      "id": 14
-    },
-    {
-      "body": "um post",
-      "idTopico": 1,
-      "profile": "fefdsafe",
-      "id": 15
-    },
-    {
-      "body": "sera que agora vai",
-      "idTopico": 1,
-      "profile": "fdsafe",
-      "id": 16
-    },
-    {
-      "body": "e foi?",
-      "idTopico": 1,
-      "profile": "fefeded",
-      "id": 17
-    },
-    {
-      "body": "ultimo",
-      "idTopico": 1,
-      "profile": "fefe",
-      "id": 18
+      "id": 5,
+      "idTopico": 3
     }
   ]
 }
